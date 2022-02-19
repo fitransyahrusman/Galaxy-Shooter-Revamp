@@ -1,6 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
+
 
 namespace Revamp
 {
@@ -8,9 +8,11 @@ namespace Revamp
     {
         [SerializeField]
         private protected float speed;
+        private protected int score;
 
         [SerializeField] 
         private protected GameObject explosionPrefab;
+
         private void Update()
         {
             MovementBehaviour();
@@ -19,8 +21,15 @@ namespace Revamp
         {
             BehaviourWhenInvisible();
         }
+        private void OnCollisionEnter2D(Collision2D collision)
+        {
+            OnCollision(collision);
+        }
+
         public abstract void MovementBehaviour();
         public abstract void BehaviourWhenInvisible();
+        public abstract void OnCollision(Collision2D collision);
+       
 
     }
 }
