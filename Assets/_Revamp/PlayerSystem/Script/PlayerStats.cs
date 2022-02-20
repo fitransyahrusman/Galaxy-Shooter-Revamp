@@ -17,6 +17,7 @@ namespace Revamp
         {
             receivedStat = receivedScore;
             receivedStat?.AddPlayerScore(this);
+            Debug.Log(currentScore);
         }
     }
 }

@@ -4,25 +4,28 @@ namespace Revamp
     {
         void AddPlayerScore(PlayerStats playerStats);
     }
-    public class KamikazeOrigin : IPlayerStatModifier
+    public class KamikazeShipOrigin : IPlayerStatModifier
     {
+        private int kamikazeScore;
         public void AddPlayerScore(PlayerStats playerStats)
         {
-            throw new System.NotImplementedException();
+            playerStats.CurrentScore += kamikazeScore;
         }
     }
-    public class ShooterOrigin : IPlayerStatModifier
+    public class ShooterShipOrigin : IPlayerStatModifier
     {
+        private int shooterScore;
         public void AddPlayerScore(PlayerStats playerStats)
         {
-            throw new System.NotImplementedException();
+            playerStats.CurrentScore += shooterScore;
         }
     }
     public class RotatingRockOrigin : IPlayerStatModifier
     {
+        private int rotationRockScore;
         public void AddPlayerScore(PlayerStats playerStats)
         {
-            throw new System.NotImplementedException();
+            playerStats.CurrentScore += rotationRockScore;
         }
     }
 }
