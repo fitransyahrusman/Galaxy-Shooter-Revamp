@@ -24,7 +24,11 @@ public class ShooterShip : EnemyBase
     }
     public override void ChildBehaviourWhenEnterTrigger2D(Collider2D collision)
     {
-        //
+        if (collision.tag == "Laser")
+        {
+            var player = collision.GetComponent<PlayerStats>();
+            player.Scoring(new ShooterShipOrigin());
+        }
     }
     IEnumerator ResettingTrail()
     {

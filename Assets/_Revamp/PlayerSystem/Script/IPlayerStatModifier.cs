@@ -6,7 +6,7 @@ namespace Revamp
     }
     public class KamikazeShipOrigin : IPlayerStatModifier
     {
-        private int kamikazeScore;
+        private int kamikazeScore = 75;
         public void AddPlayerScore(PlayerStats playerStats)
         {
             playerStats.CurrentScore += kamikazeScore;
@@ -14,7 +14,7 @@ namespace Revamp
     }
     public class ShooterShipOrigin : IPlayerStatModifier
     {
-        private int shooterScore;
+        private int shooterScore = 100;
         public void AddPlayerScore(PlayerStats playerStats)
         {
             playerStats.CurrentScore += shooterScore;
@@ -22,11 +22,12 @@ namespace Revamp
     }
     public class RotatingRockOrigin : IPlayerStatModifier
     {
-        private int rotationRockScore;
+        private int rotationRockScore = 25;
         public void AddPlayerScore(PlayerStats playerStats)
         {
             playerStats.CurrentScore += rotationRockScore;
         }
     }
+    // meanwhile each score hard coded in each class
 }
 
