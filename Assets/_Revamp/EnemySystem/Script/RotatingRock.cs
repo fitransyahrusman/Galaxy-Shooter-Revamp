@@ -6,12 +6,7 @@ public class RotatingRock : EnemyBase
     [Header("Class Member Variable")]
     [SerializeField]
     Rigidbody2D myRigidbody;
-
-    private RotatingRock ()
-    {
-        score = 100;
-    }
-        
+  
     public override void MovementBehaviour()
     {
         myRigidbody.AddTorque(Random.Range(-1f, 1f));
@@ -22,8 +17,8 @@ public class RotatingRock : EnemyBase
         // just destroy it, it will come in a wave in gameplay
         Destroy(gameObject);
     }
-    public override void OnCollision(Collision2D collision)
+    public override void BehaviourWhenEnterTrigger2D(Collider2D collision)
     {
-
+        throw new System.NotImplementedException();
     }
 }

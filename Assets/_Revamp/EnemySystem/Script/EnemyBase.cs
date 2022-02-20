@@ -8,10 +8,9 @@ namespace Revamp
     {
         [SerializeField]
         private protected float speed;
-        private protected int score;
-
+       
         [SerializeField] 
-        private protected GameObject explosionPrefab;
+        private protected ParticleSystem explosionParticle;
 
         private void Update()
         {
@@ -21,14 +20,17 @@ namespace Revamp
         {
             BehaviourWhenInvisible();
         }
-        private void OnCollisionEnter2D(Collision2D collision)
+        private void OnTriggerEnter2D(Collider2D collision)
         {
-            OnCollision(collision);
-        }
+            BehaviourWhenEnterTrigger2D(collision);
+            // if tag is player :
+            // playing particle system prefab in each derived class
+            // destroy object derived classs
 
+        }
         public abstract void MovementBehaviour();
         public abstract void BehaviourWhenInvisible();
-        public abstract void OnCollision(Collision2D collision);
+        public abstract void BehaviourWhenEnterTrigger2D(Collider2D collision);
        
 
     }
