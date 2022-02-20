@@ -1,22 +1,37 @@
-using System;
+using System.Collections;
 using UnityEngine;
 using Revamp;
 
 public class KamikazeShip : EnemyBase
 {
-    public override void MovementBehaviour()
+    [Header("Class Member Variable")]
+    [SerializeField]
+    TrailRenderer trailPrefab;
+    public override void ChildMovementBehaviour()
     {
         Vector2 movement = new Vector2(-1f, 0f) * speed * Time.deltaTime;
         transform.Translate(movement);
     }
-    public override void BehaviourWhenInvisible()
+    public override void ChildBehaviourWhenInvisible()
     {
-        // warping to righ side of the screen
-        transform.position = new Vector2(13.5f, UnityEngine.Random.Range(-6f,6f));
+        Vector2 newPosition = new Vector2(13.5f, UnityEngine.Random.Range(-6f, 6f));
+        transform.position = newPosition;
+        StartCoroutine(ResettingTrail());
     }
-    public override void BehaviourWhenEnterTrigger2D(Collider2D collision)
+    public override void ChildBehaviourWhenVisible()
     {
-        throw new NotImplementedException();
+        //
+    }
+    public override void ChildBehaviourWhenEnterTrigger2D(Collider2D collision)
+    {
+        //
+    }
+    IEnumerator ResettingTrail()
+    {
+        var trailTime = trailPrefab.time;
+        trailPrefab.time = 0;
+        yield return new WaitForSeconds(0.25f);
+        trailPrefab.time = trailTime;
     }
 }
 

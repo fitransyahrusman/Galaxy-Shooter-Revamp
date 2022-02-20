@@ -14,23 +14,28 @@ namespace Revamp
 
         private void Update()
         {
-            MovementBehaviour();
+            ChildMovementBehaviour();
         }
         private void OnBecameInvisible()
         {
-            BehaviourWhenInvisible();
+            ChildBehaviourWhenInvisible();
+        }
+        private void OnBecameVisible()
+        {
+
         }
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            BehaviourWhenEnterTrigger2D(collision);
+            ChildBehaviourWhenEnterTrigger2D(collision);
             // if tag is player :
             // playing particle system prefab in each derived class
             // destroy object derived classs
 
         }
-        public abstract void MovementBehaviour();
-        public abstract void BehaviourWhenInvisible();
-        public abstract void BehaviourWhenEnterTrigger2D(Collider2D collision);
+        public abstract void ChildMovementBehaviour();
+        public abstract void ChildBehaviourWhenInvisible();
+        public abstract void ChildBehaviourWhenVisible();
+        public abstract void ChildBehaviourWhenEnterTrigger2D(Collider2D collision);
        
 
     }

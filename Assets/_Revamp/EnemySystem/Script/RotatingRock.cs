@@ -7,18 +7,22 @@ public class RotatingRock : EnemyBase
     [SerializeField]
     Rigidbody2D myRigidbody;
   
-    public override void MovementBehaviour()
+    public override void ChildMovementBehaviour()
     {
         myRigidbody.AddTorque(Random.Range(-1f, 1f));
         myRigidbody.AddRelativeForce(new Vector2(0,0.5f));
     }
-    public override void BehaviourWhenInvisible()
+    public override void ChildBehaviourWhenInvisible()
     {
-        // just destroy it, it will come in a wave in gameplay
         Destroy(gameObject);
     }
-    public override void BehaviourWhenEnterTrigger2D(Collider2D collision)
+    public override void ChildBehaviourWhenVisible()
     {
-        throw new System.NotImplementedException();
+        //
     }
+    public override void ChildBehaviourWhenEnterTrigger2D(Collider2D collision)
+    {
+        //
+    }
+
 }
