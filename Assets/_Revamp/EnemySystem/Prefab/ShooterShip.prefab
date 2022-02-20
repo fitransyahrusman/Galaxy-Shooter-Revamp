@@ -100,7 +100,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1.5
-  explosionParticle: {fileID: 0}
+  explosionParticle: {fileID: 7247462438968559492, guid: ab92bf8b27fc449478ab85215e093547, type: 3}
   trailPrefab: {fileID: 8441051808818287678}
 --- !u!61 &3572188718371207451
 BoxCollider2D:

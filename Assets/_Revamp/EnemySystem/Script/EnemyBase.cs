@@ -20,15 +20,22 @@ namespace Revamp
         }
         private void OnBecameVisible()
         {
-
+            //
         }
         private void OnTriggerEnter2D(Collider2D collision)
         {
             ChildBehaviourWhenEnterTrigger2D(collision);
-            // if tag is player :
-            // playing particle system prefab in each derived class
-            // destroy object derived classs
-
+            if (collision.tag == "Laser" || collision.tag == "Player")
+            {
+                Explosion();
+                Destroy(gameObject, 0.2f);
+            }
+        }
+        private void Explosion()
+        {
+            var thisPosition = transform.position;
+            var instance = Instantiate(explosionParticle, thisPosition, Quaternion.identity);
+            instance.Play();
         }
         public abstract void ChildMovementBehaviour();
         public abstract void ChildBehaviourWhenInvisible();

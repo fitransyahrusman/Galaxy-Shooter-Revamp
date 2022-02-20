@@ -137,5 +137,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0
-  explosionParticle: {fileID: 0}
+  explosionParticle: {fileID: 7247462438968559492, guid: ab92bf8b27fc449478ab85215e093547, type: 3}
   myRigidbody: {fileID: 808942380233831332}
