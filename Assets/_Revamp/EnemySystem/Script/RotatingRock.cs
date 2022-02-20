@@ -28,5 +28,9 @@ public class RotatingRock : EnemyBase
             player.Scoring(new RotatingRockOrigin());
         }
     }
+    public override void ChildBehaviourOnDestroy()
+    {
+        //
+    }
 
 }

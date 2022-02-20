@@ -20,7 +20,7 @@ namespace Revamp
         }
         private void OnBecameVisible()
         {
-            //
+            ChildBehaviourWhenVisible();
         }
         private void OnTriggerEnter2D(Collider2D collision)
         {
@@ -37,10 +37,15 @@ namespace Revamp
             var instance = Instantiate(explosionParticle, thisPosition, Quaternion.identity);
             instance.Play();
         }
+        private void OnDestroy()
+        {
+            ChildBehaviourOnDestroy();
+        }
         public abstract void ChildMovementBehaviour();
         public abstract void ChildBehaviourWhenInvisible();
         public abstract void ChildBehaviourWhenVisible();
         public abstract void ChildBehaviourWhenEnterTrigger2D(Collider2D collision);
+        public abstract void ChildBehaviourOnDestroy();
        
 
     }
