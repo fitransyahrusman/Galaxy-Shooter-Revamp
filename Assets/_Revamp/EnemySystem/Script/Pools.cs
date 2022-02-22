@@ -14,25 +14,34 @@ public class Pools: MonoBehaviour
             GetKamikaze,
             ReleaseKamikaze,
             DestroyKamikaze,
-            maxSize : 10
-            );
+            defaultCapacity: 25
+            ) ;
     }
     KamikazeShip CreateKamikaze()
     {
         var instance = Instantiate(kamikazePrefab);
-        kamikazePrefab.SetPool(kamikazePool);
+        instance.SetPool(kamikazePool);
         return instance;
     }
     void GetKamikaze(KamikazeShip kamikazeShip)
     {
         kamikazeShip.gameObject.SetActive(true);
+        kamikazeShip.transform.position = kamikazeShip.SetSpawnPoint();
     }
     void ReleaseKamikaze(KamikazeShip kamikazeShip)
     {
+        kamikazeShip.TrailPrefab.time = 0;
         kamikazeShip.gameObject.SetActive(false);
     }
     void DestroyKamikaze(KamikazeShip kamikazeShip)
     {
         Destroy(kamikazeShip);
+    }
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            kamikazePool.Get();
+        }
     }
 }

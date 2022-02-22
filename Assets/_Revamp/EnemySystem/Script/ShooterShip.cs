@@ -8,7 +8,7 @@ public class ShooterShip : EnemyBase
     [SerializeField]
     TrailRenderer trailPrefab;
     private float trailTime = 1.5f;
-    public override void ChildMovementBehaviour()
+    public override void ChildBehaviourInUpdate()
     {
         Vector2 movement = new Vector2(-1f, 0f) * speed * Time.deltaTime;
         transform.Translate(movement);
@@ -17,11 +17,6 @@ public class ShooterShip : EnemyBase
     {
         Vector2 newPosition = new Vector2(13.5f, UnityEngine.Random.Range(-6f, 6f));
         transform.position = newPosition;
-        ResettingTrail();
-    }
-    public override void ChildBehaviourWhenVisible()
-    {
-        if (trailPrefab != null) trailPrefab.time = trailTime;
     }
     public override void ChildBehaviourWhenEnterTrigger2D(Collider2D collision)
     {
@@ -31,12 +26,6 @@ public class ShooterShip : EnemyBase
             player.Scoring(new ShooterShipOrigin());
         }
     }
-    async void ResettingTrail()
-    {
-            trailPrefab.time = 0;
-            await Task.Delay(1000); 
-    }
-
     public override void ChildBehaviourOnDestroy()
     {
         //

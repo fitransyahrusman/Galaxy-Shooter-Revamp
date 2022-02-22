@@ -12,15 +12,11 @@ namespace Revamp
 
         private void Update()
         {
-            ChildMovementBehaviour();
+            ChildBehaviourInUpdate();
         }
         private void OnBecameInvisible()
         {
             ChildBehaviourWhenInvisible();
-        }
-        private void OnBecameVisible()
-        {
-            ChildBehaviourWhenVisible();
         }
         private void OnTriggerEnter2D(Collider2D collision)
         {
@@ -41,9 +37,8 @@ namespace Revamp
         {
             ChildBehaviourOnDestroy();
         }
-        public abstract void ChildMovementBehaviour();
+        public abstract void ChildBehaviourInUpdate();
         public abstract void ChildBehaviourWhenInvisible();
-        public abstract void ChildBehaviourWhenVisible();
         public abstract void ChildBehaviourWhenEnterTrigger2D(Collider2D collision);
         public abstract void ChildBehaviourOnDestroy();
        

@@ -7,7 +7,7 @@ public class RotatingRock : EnemyBase
     [SerializeField]
     Rigidbody2D myRigidbody;
   
-    public override void ChildMovementBehaviour()
+    public override void ChildBehaviourInUpdate()
     {
         myRigidbody.AddTorque(Random.Range(-1f, 1f));
         myRigidbody.AddRelativeForce(new Vector2(0,0.5f));
@@ -15,10 +15,6 @@ public class RotatingRock : EnemyBase
     public override void ChildBehaviourWhenInvisible()
     {
         Destroy(gameObject);
-    }
-    public override void ChildBehaviourWhenVisible()
-    {
-        //
     }
     public override void ChildBehaviourWhenEnterTrigger2D(Collider2D collision)
     {
