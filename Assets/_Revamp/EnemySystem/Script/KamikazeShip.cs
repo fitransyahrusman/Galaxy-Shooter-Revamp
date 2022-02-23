@@ -13,7 +13,6 @@ public class KamikazeShip : EnemyBase
     {
         get { return trailPrefab; }
     }
-
     private IObjectPool<KamikazeShip> kamikazePool;
 
     #region Behaviour
@@ -44,7 +43,7 @@ public class KamikazeShip : EnemyBase
         // if the object is destroyed
     }
     #endregion
-
+    #region ObjectPool
     public void SetPool(IObjectPool<KamikazeShip> receivedPool)
     {
         kamikazePool = receivedPool;
@@ -54,6 +53,7 @@ public class KamikazeShip : EnemyBase
         Vector2 newPosition = new Vector2(15f, UnityEngine.Random.Range(-6f, 6f));
         return newPosition;
     }
+    #endregion
 }
 
 
