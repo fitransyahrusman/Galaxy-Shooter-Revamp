@@ -18,21 +18,21 @@ public class Pools: MonoBehaviour
             GetKamikaze,
             ReleaseKamikaze,
             DestroyKamikaze,
-            defaultCapacity : 2
+            maxSize : 20
             ) ;
         shooterPool = new ObjectPool<ShooterShip>(
             CreateShooter,
             GetShooter,
             ReleaseShooter,
             DestroyShooter,
-            maxSize : 3
+            maxSize : 15
             );
             rotatingRockPool = new ObjectPool<RotatingRock>(
             CreateRotatingRock,
             GetRotatingRock,
             ReleaseRotatingRock,
             DestroyRotatingRock,
-            maxSize : 2
+            maxSize : 10
             );
     }
     #region KamikazePoolAction
@@ -54,7 +54,7 @@ public class Pools: MonoBehaviour
     }
     void DestroyKamikaze(KamikazeShip kamikazeShip)
     {
-        Destroy(kamikazeShip);
+        Destroy(kamikazeShip.gameObject);
     }
     #endregion
     #region ShooterShipAction
@@ -76,7 +76,7 @@ public class Pools: MonoBehaviour
     }
     void DestroyShooter(ShooterShip shooterShip)
     {
-        Destroy(shooterShip);
+        Destroy(shooterShip.gameObject);
     }
     #endregion
     #region RotatingRockAction
@@ -97,7 +97,7 @@ public class Pools: MonoBehaviour
     }
     void DestroyRotatingRock(RotatingRock rotatingRock)
     {
-        Destroy(rotatingRock);
+        Destroy(rotatingRock.gameObject);
     }
     #endregion
     private void Update()
