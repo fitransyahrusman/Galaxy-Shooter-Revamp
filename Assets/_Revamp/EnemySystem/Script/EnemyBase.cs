@@ -21,19 +21,8 @@ namespace Revamp
         private void OnTriggerEnter2D(Collider2D collision)
         {
             ChildBehaviourWhenEnterTrigger2D(collision);
-            if (collision.tag == "Laser" || collision.tag == "Player")
-            {
-                Explosion();
-                Destroy(gameObject, 0.2f);
-            }
         }
-        private void Explosion()
-        {
-            var thisPosition = transform.position;
-            var instance = Instantiate(explosionParticle, thisPosition, Quaternion.identity);
-            instance.Play();
-        }
-        private void OnDestroy()
+        private void OnDestroy() // not used for now but lets keep it for future need
         {
             ChildBehaviourOnDestroy();
         }
@@ -41,6 +30,20 @@ namespace Revamp
         public abstract void ChildBehaviourWhenInvisible();
         public abstract void ChildBehaviourWhenEnterTrigger2D(Collider2D collision);
         public abstract void ChildBehaviourOnDestroy();
+
+        public virtual void Explosion() //possible for different explosion
+        {
+            var thisPosition = transform.position;
+            var instance = Instantiate(explosionParticle, thisPosition, Quaternion.identity);
+            instance.Play();
+        }
+        public virtual Vector2 SetSpawnPoint() // possible for different spawnpoint
+        {
+            Vector2 newPosition = new Vector2(15f, UnityEngine.Random.Range(-6f, 6f));
+            return newPosition;
+        }
+
+
        
 
     }

@@ -34,6 +34,12 @@ public class KamikazeShip : EnemyBase
         {
             var player = collision.GetComponent<PlayerStats>();
             player.Scoring(new KamikazeShipOrigin());
+            kamikazePool.Release(this);
+        }
+        else if (collision.tag == "Player")
+        {
+            base.Explosion();
+            kamikazePool.Release(this);
         }
     }
     public override void ChildBehaviourOnDestroy()
@@ -47,11 +53,6 @@ public class KamikazeShip : EnemyBase
     public void SetPool(IObjectPool<KamikazeShip> receivedPool)
     {
         kamikazePool = receivedPool;
-    }
-    public Vector2 SetSpawnPoint()
-    {
-        Vector2 newPosition = new Vector2(15f, UnityEngine.Random.Range(-6f, 6f));
-        return newPosition;
     }
     #endregion
 }

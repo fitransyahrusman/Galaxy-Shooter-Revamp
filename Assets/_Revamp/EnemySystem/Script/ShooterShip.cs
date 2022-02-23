@@ -33,6 +33,12 @@ public class ShooterShip : EnemyBase
         {
             var player = collision.GetComponent<PlayerStats>();
             player.Scoring(new ShooterShipOrigin());
+            shooterPool.Release(this);
+        }
+        else if (collision.tag == "Player")
+        {
+            base.Explosion();
+            shooterPool.Release(this);
         }
     }
     public override void ChildBehaviourOnDestroy()
@@ -46,11 +52,6 @@ public class ShooterShip : EnemyBase
     public void SetPool(IObjectPool<ShooterShip> receivedPool)
     {
         shooterPool = receivedPool;
-    }
-    public Vector2 SetSpawnPoint()
-    {
-        Vector2 newPosition = new Vector2(15f, UnityEngine.Random.Range(-6f, 6f));
-        return newPosition;
     }
     #endregion
 }

@@ -2464,6 +2464,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   kamikazePrefab: {fileID: 143081077666489727, guid: 27f9ffdb41625654c91b0ba54c227ea3, type: 3}
+  shooterPrefab: {fileID: 8033322718074988760, guid: 54ecb5d81e2399b44af30f1e8319aeed, type: 3}
+  rotatingRockPrefab: {fileID: 808942380233831329, guid: 50ed06565c50e2743808a3186defa70a, type: 3}
 --- !u!4 &1099753712
 Transform:
   m_ObjectHideFlags: 0

@@ -5,9 +5,11 @@ public class Pools: MonoBehaviour
 {
     [SerializeField] private KamikazeShip kamikazePrefab;
     [SerializeField] private ShooterShip shooterPrefab;
+    [SerializeField] private RotatingRock rotatingRockPrefab;
 
     private IObjectPool<KamikazeShip> kamikazePool;
     private IObjectPool<ShooterShip> shooterPool;
+    private IObjectPool<RotatingRock> rotatingRockPool;
 
     private void Awake()
     {
@@ -16,14 +18,21 @@ public class Pools: MonoBehaviour
             GetKamikaze,
             ReleaseKamikaze,
             DestroyKamikaze,
-            defaultCapacity: 25
+            defaultCapacity : 2
             ) ;
         shooterPool = new ObjectPool<ShooterShip>(
             CreateShooter,
             GetShooter,
             ReleaseShooter,
             DestroyShooter,
-            defaultCapacity : 20
+            maxSize : 3
+            );
+            rotatingRockPool = new ObjectPool<RotatingRock>(
+            CreateRotatingRock,
+            GetRotatingRock,
+            ReleaseRotatingRock,
+            DestroyRotatingRock,
+            maxSize : 2
             );
     }
     #region KamikazePoolAction
@@ -70,6 +79,27 @@ public class Pools: MonoBehaviour
         Destroy(shooterShip);
     }
     #endregion
+    #region RotatingRockAction
+    RotatingRock CreateRotatingRock()
+    {
+        var instance = Instantiate(rotatingRockPrefab);
+        instance.SetPool(rotatingRockPool);
+        return instance ;
+    }
+    void GetRotatingRock(RotatingRock rotatingRock)
+    {
+        rotatingRock.gameObject.SetActive(true);
+        rotatingRock.transform.position = rotatingRock.SetSpawnPoint(); 
+    }
+    void ReleaseRotatingRock(RotatingRock rotatingRock)
+    {
+        rotatingRock.gameObject.SetActive(false);
+    }
+    void DestroyRotatingRock(RotatingRock rotatingRock)
+    {
+        Destroy(rotatingRock);
+    }
+    #endregion
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
@@ -79,6 +109,10 @@ public class Pools: MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             shooterPool.Get();
+        }
+        if (Input.GetKeyDown (KeyCode.Alpha3))
+        {
+            rotatingRockPool.Get();
         }
     }   
 }
