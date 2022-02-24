@@ -1,27 +1,31 @@
 using UnityEngine;
 using Revamp;
-using System.Threading.Tasks;
+using UnityEngine.Pool;
 
 public class ShooterShip : EnemyBase
 {
     [Header("Class Member Variable")]
-    [SerializeField]
-    TrailRenderer trailPrefab;
     private float trailTime = 1.5f;
-    public override void ChildMovementBehaviour()
+
+    [SerializeField] TrailRenderer trailPrefab;
+    public TrailRenderer TrailPrefab
+    {
+        get { return trailPrefab; }
+    }
+    private IObjectPool<ShooterShip> shooterPool;
+
+    #region Behaviour
+    public override void ChildBehaviourInUpdate()
     {
         Vector2 movement = new Vector2(-1f, 0f) * speed * Time.deltaTime;
         transform.Translate(movement);
+
+        bool enterTheFrame = transform.position.x <= 13f;
+        if (enterTheFrame) trailPrefab.time = trailTime;
     }
     public override void ChildBehaviourWhenInvisible()
-    {
-        Vector2 newPosition = new Vector2(13.5f, UnityEngine.Random.Range(-6f, 6f));
-        transform.position = newPosition;
-        ResettingTrail();
-    }
-    public override void ChildBehaviourWhenVisible()
-    {
-        if (trailPrefab != null) trailPrefab.time = trailTime;
+    {         
+        shooterPool.Release(this);
     }
     public override void ChildBehaviourWhenEnterTrigger2D(Collider2D collision)
     {
@@ -29,16 +33,25 @@ public class ShooterShip : EnemyBase
         {
             var player = collision.GetComponent<PlayerStats>();
             player.Scoring(new ShooterShipOrigin());
+            shooterPool.Release(this);
+        }
+        else if (collision.tag == "Player")
+        {
+            base.Explosion();
+            shooterPool.Release(this);
         }
     }
-    async void ResettingTrail()
-    {
-            trailPrefab.time = 0;
-            await Task.Delay(1000); 
-    }
-
     public override void ChildBehaviourOnDestroy()
     {
-        //
+        // for removing from list or array
+        // or any other function that need to run
+        // if the object is destroyed
     }
+    #endregion
+    #region ObjectPool
+    public void SetPool(IObjectPool<ShooterShip> receivedPool)
+    {
+        shooterPool = receivedPool;
+    }
+    #endregion
 }

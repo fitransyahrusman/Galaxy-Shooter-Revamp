@@ -1,27 +1,32 @@
 using System.Threading.Tasks;
 using UnityEngine;
 using Revamp;
+using UnityEngine.Pool;
 
 public class KamikazeShip : EnemyBase
 {
     [Header("Class Member Variable")]
-    [SerializeField]
-    TrailRenderer trailPrefab;
     private float trailTime = 0.8f;
-    public override void ChildMovementBehaviour()
+
+    [SerializeField] TrailRenderer trailPrefab;
+    public TrailRenderer TrailPrefab
+    {
+        get { return trailPrefab; }
+    }
+    private IObjectPool<KamikazeShip> kamikazePool;
+
+    #region Behaviour
+    public override void ChildBehaviourInUpdate()
     {
         Vector2 movement = new Vector2(-1f, 0f) * speed * Time.deltaTime;
         transform.Translate(movement);
+
+        bool enterTheFrame = transform.position.x <= 13f;
+        if (enterTheFrame) trailPrefab.time = trailTime;
     }
     public override void ChildBehaviourWhenInvisible()
     {
-        Vector2 newPosition = new Vector2(13.5f, UnityEngine.Random.Range(-6f, 6f));
-        transform.position = newPosition;
-        ResettingTrail();
-    }
-    public override void ChildBehaviourWhenVisible()
-    {
-        if (trailPrefab != null) trailPrefab.time = trailTime;
+        kamikazePool.Release(this);
     }
     public override void ChildBehaviourWhenEnterTrigger2D(Collider2D collision)
     {
@@ -29,17 +34,27 @@ public class KamikazeShip : EnemyBase
         {
             var player = collision.GetComponent<PlayerStats>();
             player.Scoring(new KamikazeShipOrigin());
+            kamikazePool.Release(this);
         }
-    }
-    async void ResettingTrail()
-    {
-        trailPrefab.time = 0;
-        await Task.Delay(1000);
+        else if (collision.tag == "Player")
+        {
+            base.Explosion();
+            kamikazePool.Release(this);
+        }
     }
     public override void ChildBehaviourOnDestroy()
     {
-        //
+        // for removing from list or array
+        // or any other function that need to run
+        // if the object is destroyed
     }
+    #endregion
+    #region ObjectPool
+    public void SetPool(IObjectPool<KamikazeShip> receivedPool)
+    {
+        kamikazePool = receivedPool;
+    }
+    #endregion
 }
 
 
