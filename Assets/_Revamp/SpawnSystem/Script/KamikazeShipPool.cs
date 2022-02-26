@@ -5,9 +5,10 @@ namespace Revamp.Spawn
 {
     public class KamikazeShipPool : MonoBehaviour
     {
-        [SerializeField] private KamikazeShip kamikazePrefab;      
+        [SerializeField] private KamikazeShip kamikazePrefab;
+        [SerializeField] private TheSpawner theSpawner;
                         
-        internal IObjectPool<KamikazeShip> kamikazePool;       
+        private IObjectPool<KamikazeShip> kamikazePool;       
         
         private void Awake()
         {
@@ -17,7 +18,7 @@ namespace Revamp.Spawn
                 ReleaseKamikaze,
                 DestroyKamikaze,
                 maxSize: 20
-                );           
+                );  
         }
         #region KamikazePoolAction
         KamikazeShip CreateKamikaze()
@@ -26,7 +27,7 @@ namespace Revamp.Spawn
             instance.SetPool(kamikazePool);
             return instance;
         }
-        internal void GetKamikaze(KamikazeShip kamikazeShip)
+        void GetKamikaze(KamikazeShip kamikazeShip)
         {
             kamikazeShip.gameObject.SetActive(true);
             kamikazeShip.transform.position = kamikazeShip.SetSpawnPoint();
@@ -40,13 +41,19 @@ namespace Revamp.Spawn
         {
             Destroy(kamikazeShip.gameObject);
         }
-        #endregion
-        private void Update()
+        void GetKamikazeEvent()
         {
-            if (Input.GetKeyDown(KeyCode.Alpha1))
-            {
-                kamikazePool.Get();
-            }      
+            kamikazePool.Get();
+            Debug.Log("The event are called");
+        }
+        #endregion
+        private void OnEnable()
+        {
+            theSpawner.kamikazeSpawn += GetKamikazeEvent;
+        }
+        private void OnDisable()
+        {
+            theSpawner.kamikazeSpawn -= GetKamikazeEvent;
         }
     }
 }

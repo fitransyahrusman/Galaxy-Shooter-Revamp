@@ -1,10 +1,14 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.Pool;
+using System;
 
 namespace Revamp.Spawn
 {
     public class SpawnMachine : MonoBehaviour
     {
+        [SerializeField] int slowSpawnMaxLimit = 50;
+        
         public static SpawnMachine Instance;
 
         [Header("Fast Interval Setting")]
@@ -47,18 +51,30 @@ namespace Revamp.Spawn
             SlowIntervalCreator(slowSpawnerRateFloor, slowSpawnerRateCeil, slowSpawnerPeriod);
         }
         #region Spawning
-        internal void SpawnStart()
+        internal void SpawnStart(Action action, int amountToSpawn)
         {
-            StartCoroutine(SpawnObjectOne());
-            StartCoroutine(SpawnObjectTwo());
+            StartCoroutine(SpawnObjectOne(action, amountToSpawn));
         }
-        IEnumerator SpawnObjectOne()
+        IEnumerator SpawnObjectOne(Action action ,int amountToSpawn)
         {
-            yield return null;
-        }
-        IEnumerator SpawnObjectTwo()
-        {
-            yield return null;
+            if (amountToSpawn > slowSpawnMaxLimit)
+            {
+                for (int i = 0; i < amountToSpawn; i++)
+                {
+                    action();
+                    yield return new WaitForSeconds(fastDynamicIntervalResult);
+                }
+                StopCoroutine(SpawnObjectOne( action, amountToSpawn));
+            }
+            else
+            {
+                for (int i = 0; i < amountToSpawn; i++)
+                {
+                    action();
+                    yield return new WaitForSeconds(slowDynamicIntervalResult);
+                }
+            }
+            
         }
         #endregion
         #region Interval

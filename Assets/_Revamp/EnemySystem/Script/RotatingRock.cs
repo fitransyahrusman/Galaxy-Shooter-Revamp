@@ -15,7 +15,7 @@ public class RotatingRock : EnemyBase
     }
     public override void ChildBehaviourWhenInvisible()
     {
-        rotatingRockPool.Release(this);
+        if (rotatingRockPool != null) rotatingRockPool.Release(this);
     }
     public override void ChildBehaviourWhenEnterTrigger2D(Collider2D collision)
     {
@@ -23,12 +23,12 @@ public class RotatingRock : EnemyBase
         {
             var player = collision.GetComponent<PlayerStats>();
             player.Scoring(new RotatingRockOrigin());
-            rotatingRockPool.Release(this);
+            if (rotatingRockPool != null) rotatingRockPool.Release(this);
         }
         else if (collision.tag == "Player")
         {
             base.Explosion();
-            rotatingRockPool.Release(this);
+            if (rotatingRockPool != null) rotatingRockPool.Release(this);
         }
     }
     public override void ChildBehaviourOnDestroy()

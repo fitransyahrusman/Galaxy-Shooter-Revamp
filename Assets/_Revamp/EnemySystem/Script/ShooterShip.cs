@@ -25,7 +25,7 @@ public class ShooterShip : EnemyBase
     }
     public override void ChildBehaviourWhenInvisible()
     {         
-        shooterPool.Release(this);
+        if (shooterPool != null) shooterPool.Release(this);
     }
     public override void ChildBehaviourWhenEnterTrigger2D(Collider2D collision)
     {
@@ -33,12 +33,12 @@ public class ShooterShip : EnemyBase
         {
             var player = collision.GetComponent<PlayerStats>();
             player.Scoring(new ShooterShipOrigin());
-            shooterPool.Release(this);
+            if (shooterPool != null) shooterPool.Release(this);
         }
         else if (collision.tag == "Player")
         {
             base.Explosion();
-            shooterPool.Release(this);
+            if (shooterPool != null) shooterPool.Release(this);
         }
     }
     public override void ChildBehaviourOnDestroy()

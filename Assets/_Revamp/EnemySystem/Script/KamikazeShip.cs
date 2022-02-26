@@ -13,7 +13,7 @@ public class KamikazeShip : EnemyBase
     {
         get { return trailPrefab; }
     }
-    private IObjectPool<KamikazeShip> kamikazePool;
+    public IObjectPool<KamikazeShip> kamikazePool;
 
     #region Behaviour
     public override void ChildBehaviourInUpdate()
@@ -26,7 +26,7 @@ public class KamikazeShip : EnemyBase
     }
     public override void ChildBehaviourWhenInvisible()
     {
-        kamikazePool.Release(this);
+        if (kamikazePool != null) kamikazePool.Release(this);
     }
     public override void ChildBehaviourWhenEnterTrigger2D(Collider2D collision)
     {
@@ -34,12 +34,12 @@ public class KamikazeShip : EnemyBase
         {
             var player = collision.GetComponent<PlayerStats>();
             player.Scoring(new KamikazeShipOrigin());
-            kamikazePool.Release(this);
+            if (kamikazePool != null) kamikazePool.Release(this);
         }
         else if (collision.tag == "Player")
         {
             base.Explosion();
-            kamikazePool.Release(this);
+            if (kamikazePool != null) kamikazePool.Release(this);
         }
     }
     public override void ChildBehaviourOnDestroy()
