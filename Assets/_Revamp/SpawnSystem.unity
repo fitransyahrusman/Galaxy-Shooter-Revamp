@@ -1734,8 +1734,12 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7671221108761872681, guid: 1d9bc6a8d93d3974f9f35f99399a2521, type: 3}
-      propertyPath: waves.Array.data[1].waveName
+      propertyPath: waves.Array.data[0].waveName
       value: Second Wave
+      objectReference: {fileID: 0}
+    - target: {fileID: 7671221108761872681, guid: 1d9bc6a8d93d3974f9f35f99399a2521, type: 3}
+      propertyPath: waves.Array.data[1].waveName
+      value: First Wave
       objectReference: {fileID: 0}
     - target: {fileID: 7671221108761872681, guid: 1d9bc6a8d93d3974f9f35f99399a2521, type: 3}
       propertyPath: waves.Array.data[0].spawnItems.Array.size
@@ -1747,7 +1751,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7671221108761872681, guid: 1d9bc6a8d93d3974f9f35f99399a2521, type: 3}
       propertyPath: waves.Array.data[0].spawnItems.Array.data[0].objectName
-      value: Kamikaze
+      value: Rotating Rock
       objectReference: {fileID: 0}
     - target: {fileID: 7671221108761872681, guid: 1d9bc6a8d93d3974f9f35f99399a2521, type: 3}
       propertyPath: waves.Array.data[0].spawnItems.Array.data[1].objectName
@@ -1755,7 +1759,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7671221108761872681, guid: 1d9bc6a8d93d3974f9f35f99399a2521, type: 3}
       propertyPath: waves.Array.data[1].spawnItems.Array.data[0].objectName
-      value: Rotating Rock
+      value: Kamikaze
       objectReference: {fileID: 0}
     - target: {fileID: 7671221108761872681, guid: 1d9bc6a8d93d3974f9f35f99399a2521, type: 3}
       propertyPath: waves.Array.data[1].spawnItems.Array.data[1].objectName
@@ -1768,7 +1772,7 @@ PrefabInstance:
     - target: {fileID: 7671221108761872681, guid: 1d9bc6a8d93d3974f9f35f99399a2521, type: 3}
       propertyPath: waves.Array.data[0].spawnItems.Array.data[0].enemyPrefab
       value: 
-      objectReference: {fileID: 143081077666489714, guid: 27f9ffdb41625654c91b0ba54c227ea3, type: 3}
+      objectReference: {fileID: 808942380233831328, guid: 50ed06565c50e2743808a3186defa70a, type: 3}
     - target: {fileID: 7671221108761872681, guid: 1d9bc6a8d93d3974f9f35f99399a2521, type: 3}
       propertyPath: waves.Array.data[0].spawnItems.Array.data[0].spawnAmount
       value: 7
@@ -1784,7 +1788,7 @@ PrefabInstance:
     - target: {fileID: 7671221108761872681, guid: 1d9bc6a8d93d3974f9f35f99399a2521, type: 3}
       propertyPath: waves.Array.data[1].spawnItems.Array.data[0].enemyPrefab
       value: 
-      objectReference: {fileID: 808942380233831328, guid: 50ed06565c50e2743808a3186defa70a, type: 3}
+      objectReference: {fileID: 143081077666489714, guid: 27f9ffdb41625654c91b0ba54c227ea3, type: 3}
     - target: {fileID: 7671221108761872681, guid: 1d9bc6a8d93d3974f9f35f99399a2521, type: 3}
       propertyPath: waves.Array.data[1].spawnItems.Array.data[0].spawnAmount
       value: 7
