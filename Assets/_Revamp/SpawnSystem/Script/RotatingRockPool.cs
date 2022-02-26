@@ -6,6 +6,7 @@ namespace Revamp.Spawn
     public class RotatingRockPool : MonoBehaviour
     {
         [SerializeField] private RotatingRock rotatingRockPrefab;
+        [SerializeField] private TheSpawner theSpawner;
 
         internal IObjectPool<RotatingRock> rotatingRockPool;
 
@@ -40,12 +41,17 @@ namespace Revamp.Spawn
             Destroy(rotatingRock.gameObject);
         }
         #endregion
-        void Update()
+        internal void GetRotatingRockEvent()
         {
-            if (Input.GetKeyDown(KeyCode.Alpha3))
-            {
-                rotatingRockPool.Get();
-            }
+            rotatingRockPool.Get();
+        }
+        private void OnEnable()
+        {
+            theSpawner.rotatingRockSpawnEvent += GetRotatingRockEvent;
+        }
+        private void OnDisable()
+        {
+            theSpawner.rotatingRockSpawnEvent -= GetRotatingRockEvent;
         }
     }
 }

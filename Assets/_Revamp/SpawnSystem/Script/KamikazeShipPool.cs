@@ -41,19 +41,18 @@ namespace Revamp.Spawn
         {
             Destroy(kamikazeShip.gameObject);
         }
-        void GetKamikazeEvent()
+        internal void GetKamikazeEvent()
         {
             kamikazePool.Get();
-            Debug.Log("The event are called");
         }
         #endregion
         private void OnEnable()
         {
-            theSpawner.kamikazeSpawn += GetKamikazeEvent;
+            theSpawner.kamikazeSpawnEvent += GetKamikazeEvent;
         }
         private void OnDisable()
         {
-            theSpawner.kamikazeSpawn -= GetKamikazeEvent;
+            theSpawner.kamikazeSpawnEvent -= GetKamikazeEvent;
         }
     }
 }

@@ -45,3 +45,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shooterPrefab: {fileID: 8033322718074988760, guid: 54ecb5d81e2399b44af30f1e8319aeed, type: 3}
+  theSpawner: {fileID: 0}

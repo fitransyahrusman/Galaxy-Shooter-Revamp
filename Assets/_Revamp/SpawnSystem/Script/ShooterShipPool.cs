@@ -6,8 +6,9 @@ namespace Revamp.Spawn
     public class ShooterShipPool : MonoBehaviour
     {
         [SerializeField] private ShooterShip shooterPrefab;
+        [SerializeField] private TheSpawner theSpawner;
 
-        internal IObjectPool<ShooterShip> shooterPool;
+        private IObjectPool<ShooterShip> shooterPool;
 
         private void Awake()
         {
@@ -41,12 +42,17 @@ namespace Revamp.Spawn
             Destroy(shooterShip.gameObject);
         }
         #endregion
-        private void Update()
+        internal void GetShooterEvent()
         {
-            if (Input.GetKeyDown(KeyCode.Alpha2))
-            {
-                shooterPool.Get();
-            }
+            shooterPool.Get();
+        }
+        private void OnEnable()
+        {
+            theSpawner.shooterSpawnEvent += GetShooterEvent;
+        }
+        private void OnDisable()
+        {
+            theSpawner.shooterSpawnEvent -= GetShooterEvent;
         }
     }   
 }

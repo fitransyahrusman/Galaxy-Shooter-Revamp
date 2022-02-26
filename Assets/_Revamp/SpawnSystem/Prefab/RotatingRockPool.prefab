@@ -45,3 +45,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotatingRockPrefab: {fileID: 808942380233831329, guid: 50ed06565c50e2743808a3186defa70a, type: 3}
+  theSpawner: {fileID: 0}

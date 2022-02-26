@@ -44,3 +44,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d44cc932a72d6b948a82d6f9ad0410af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  slowSpawnMaxLimit: 10
+  fastSpawnerRateFloor: 2
+  fastSpawnerRateCeil: 3
+  fastSpawnerPeriod: 1
+  slowSpawnerRateFloor: 3.5
+  slowSpawnerRateCeil: 3
+  slowSpawnerPeriod: 1
+  fastDynamicIntervalResult: 0
+  slowDynamicIntervalResult: 0

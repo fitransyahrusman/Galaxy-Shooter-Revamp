@@ -62,7 +62,7 @@ namespace Revamp.Spawn
                 for (int i = 0; i < amountToSpawn; i++)
                 {
                     action();
-                    yield return new WaitForSeconds(fastDynamicIntervalResult);
+                    yield return new WaitForSeconds(FastIntervalGetter());
                 }
                 StopCoroutine(SpawnObjectOne( action, amountToSpawn));
             }
@@ -71,7 +71,7 @@ namespace Revamp.Spawn
                 for (int i = 0; i < amountToSpawn; i++)
                 {
                     action();
-                    yield return new WaitForSeconds(slowDynamicIntervalResult);
+                    yield return new WaitForSeconds(SlowIntervalGetter());
                 }
             }
             
