@@ -6,14 +6,17 @@ using System;
 namespace Revamp.Spawn
 {
     [System.Serializable]
+    public class SpawnItem
+    {
+        [SerializeField] string objectName;
+        [SerializeField] GameObject poolPrefab;
+        [SerializeField] int spawnAmount;
+    }
+    [System.Serializable]
     public class Waves
     {
         [SerializeField] string waveName;
-        [SerializeField] int spawnAmountOne;
-        [SerializeField] int spawnAmountTwo;
-        [SerializeField] int spawnAmountThree;
-        public List<GameObject> listWithPool;
-        public GameObject[] arrayWithPool;
+        public SpawnItem[] spawnItemArray;
     }
     public class TheSpawner : MonoBehaviour
     {
@@ -26,7 +29,11 @@ namespace Revamp.Spawn
 
         private void Update()
         {
-            
+
+        }
+        private void ArrayMover()
+        {
+
         }
 
     }
